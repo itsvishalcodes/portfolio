@@ -1,0 +1,63 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+
+interface Props {
+  entry: CollectionEntry<'work'>;
+  size?: 'lg' | 'md';
+  delay?: number;
+}
+const { entry, size = 'md', delay = 0 } = Astro.props;
+const { title, summary, period, areas, stack, metric, role } = entry.data;
+---
+
+<a
+  href={`/work/${entry.id}/`}
+  class:list={['card card-hover spotlight reveal group flex h-full flex-col overflow-hidden p-6 sm:p-7', size === 'lg' && 'lg:p-9']}
+  style={`--delay: ${delay}ms`}
+  data-areas={areas.join(',')}
+>
+  <div class="relative flex items-center justify-between gap-3">
+    <div class="flex flex-wrap gap-1.5">
+      {areas.slice(0, 3).map((a) => <span class="tag">{a}</span>)}
+    </div>
+    <span class="shrink-0 font-mono text-xs text-subtle">{period}</span>
+  </div>
+
+  <h3
+    class:list={[
+      'relative mt-5 font-semibold tracking-tight text-balance transition-colors group-hover:text-accent',
+      size === 'lg' ? 'text-2xl sm:text-[1.75rem] sm:leading-tight' : 'text-xl',
+    ]}
+  >
+    {title}
+  </h3>
+  <p class:list={['relative mt-3 leading-relaxed text-pretty text-muted', size === 'lg' ? 'text-base sm:text-lg' : 'text-[0.95rem]']}>
+    {summary}
+  </p>
+
+  <ul class="relative mt-5 flex flex-wrap gap-1.5">
+    {stack.slice(0, size === 'lg' ? 6 : 4).map((s) => <li class="chip text-xs">{s}</li>)}
+  </ul>
+
+  <div class="relative mt-auto pt-6">
+    {
+      metric && (
+        <div class="mb-5 flex items-baseline gap-3 border-t border-line pt-5">
+          <span class:list={['shrink-0 font-semibold tracking-tight whitespace-nowrap text-accent', size === 'lg' ? 'text-4xl' : 'text-3xl']}>
+            {metric.value}
+          </span>
+          <span class="text-sm leading-snug text-muted">{metric.label}</span>
+        </div>
+      )
+    }
+    <div class="flex items-end justify-between gap-4">
+      <p class="text-sm text-muted">{role}</p>
+      <span
+        class="grid size-9 shrink-0 place-items-center rounded-full border border-line text-muted transition-all group-hover:translate-x-0.5 group-hover:border-accent group-hover:text-accent"
+      >
+        <Icon name="arrow" size={16} />
+      </span>
+    </div>
+  </div>
+</a>

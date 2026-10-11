@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Stats from '../components/Stats.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import WorkCard from '../components/WorkCard.astro';
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects.astro';
+import Skills from '../components/Skills.astro';
+import Education from '../components/Education.astro';
+import Contact from '../components/Contact.astro';
+import Icon from '../components/Icon.astro';
+
+const all = await getCollection('work');
+const featured = all.filter((e) => e.data.featured).sort((a, b) => a.data.rank - b.data.rank);
+const rest = all.filter((e) => !e.data.featured).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Bento spans for the six featured cards (lg screens).
+const spans = ['lg:col-span-4', 'lg:col-span-2', 'lg:col-span-2', 'lg:col-span-2', 'lg:col-span-2', 'lg:col-span-3'];
+---
+
+<Base>
+  <Hero />
+  <Stats />
+
+  <section id="work" class="py-24 sm:py-32">
+    <div class="container-x">
+      <SectionHeading
+        index="01"
+        label="Selected work"
+        title="Things I built that are running in production."
+        lead="Case studies from four years at Optmyzr — what the problem was, what I built, and what changed. Customer names and internal details are left out."
+      />
+
+      <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-6">
+        {
+          featured.map((entry, i) => (
+            <div class:list={[spans[i] ?? 'lg:col-span-2', i === 0 && 'md:col-span-2']}>
+              <WorkCard entry={entry} size={i === 0 ? 'lg' : 'md'} delay={(i % 3) * 60} />
+            </div>
+          ))
+        }
+
+        <!-- More case studies -->
+        <div class="card reveal flex flex-col p-6 sm:p-7 lg:col-span-3" style="--delay: 60ms">
+          <div class="flex items-center justify-between">
+            <p class="eyebrow">More case studies</p>
+            <span class="font-mono text-xs text-subtle">{rest.length}</span>
+          </div>
+          <ul class="mt-4 divide-y divide-line">
+            {
+              rest.slice(0, 7).map((e) => (
+                <li>
+                  <a href={`/work/${e.id}/`} class="group flex items-baseline justify-between gap-4 py-2.5">
+                    <span class="text-[0.95rem] text-muted transition-colors group-hover:text-ink">{e.data.title}</span>
+                    <span class="shrink-0 font-mono text-xs text-subtle">{e.data.date.getFullYear()}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <a href="/work/" class="btn btn-ghost mt-auto self-start">
+            All {all.length} case studies
+            <Icon name="arrow" size={16} />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Experience />
+  <Projects />
+  <Skills />
+  <Education />
+  <Contact />
+</Base>

@@ -1,0 +1,57 @@
+---
+import Icon from './Icon.astro';
+import { site, socials } from '../data/site';
+---
+
+<section id="contact" class="relative overflow-hidden border-t border-line py-24 sm:py-32">
+  <div class="glow-orb -bottom-48 left-1/2 h-96 w-[40rem] -translate-x-1/2" aria-hidden="true"></div>
+  <div class="container-x relative">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <p class="eyebrow flex items-center justify-center gap-3">
+        <span class="text-accent">06</span>
+        <span class="h-px w-8 bg-line-strong"></span>
+        Contact
+      </p>
+      <h2 class="mt-4 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">Let’s build something.</h2>
+      <p class="mt-5 text-lg leading-relaxed text-pretty text-muted">
+        Hiring, collaborating, or just want to talk about ad platform APIs and the bugs they hide? My inbox is open.
+      </p>
+
+      <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href={`mailto:${site.email}`} class="btn btn-primary">
+          <Icon name="mail" size={17} />
+          Email me
+        </a>
+        <button
+          type="button"
+          data-copy={site.email}
+          class="btn btn-ghost font-mono text-sm data-[copied]:border-accent data-[copied]:text-accent"
+        >
+          <Icon name="copy" size={16} />
+          <span data-copy-label>{site.email}</span>
+        </button>
+      </div>
+
+      <ul class="mt-10 flex flex-wrap items-center justify-center gap-3">
+        {
+          socials
+            .filter((s) => s.icon !== 'mail')
+            .map((s) => (
+              <li>
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener"
+                  class="chip h-10 gap-2 px-4 text-sm transition-colors hover:border-line-strong hover:text-ink"
+                >
+                  <Icon name={s.icon} size={16} />
+                  {s.label}
+                  <span class="text-subtle">{s.handle}</span>
+                </a>
+              </li>
+            ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

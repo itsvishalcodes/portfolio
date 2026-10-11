@@ -1,0 +1,45 @@
+---
+import { education, achievements, community } from '../data/education';
+---
+
+<section id="education" class="border-t border-line py-20 sm:py-24">
+  <div class="container-x grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+    <div class="reveal">
+      <p class="eyebrow flex items-center gap-3">
+        <span class="text-accent">05</span>
+        <span class="h-px w-8 bg-line-strong"></span>
+        Education
+      </p>
+      <h2 class="mt-4 text-2xl font-semibold tracking-tight">{education.school}</h2>
+      <p class="mt-2 text-muted">{education.degree}</p>
+      <p class="mt-1 font-mono text-sm text-subtle">
+        {education.period} · {education.grade} · {education.place}
+      </p>
+      <p class="mt-6 text-sm leading-relaxed text-subtle">
+        Community in college: {community.join(' · ')}
+      </p>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-3">
+      {
+        achievements.map((a, i) => {
+          const inner = (
+            <>
+              <p class="text-3xl font-semibold tracking-tight text-accent">{a.value}</p>
+              <p class="mt-2 text-sm leading-snug text-muted">{a.label}</p>
+            </>
+          );
+          return a.href ? (
+            <a href={a.href} target="_blank" rel="noopener" class="card card-hover reveal p-5" style={`--delay: ${i * 60}ms`}>
+              {inner}
+            </a>
+          ) : (
+            <div class="card reveal p-5" style={`--delay: ${i * 60}ms`}>
+              {inner}
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

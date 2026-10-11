@@ -1,0 +1,88 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+import { projects, earlier } from '../data/projects';
+
+const statusStyle: Record<string, string> = {
+  Live: 'text-accent bg-accent-soft',
+  Building: 'text-amber-600 bg-amber-500/10 dark:text-amber-300',
+  'Open source': 'text-sky-700 bg-sky-500/10 dark:text-sky-300',
+  Retired: 'text-subtle bg-surface-2',
+  Shipped: 'text-accent bg-accent-soft',
+};
+---
+
+<section id="projects" class="border-t border-line bg-surface/30 py-24 sm:py-32">
+  <div class="container-x">
+    <SectionHeading
+      index="03"
+      label="Side projects"
+      title="Things I build on my own time."
+      lead="Mostly apps I wanted to exist — and an excuse to learn a stack properly."
+    />
+
+    <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {
+        projects.map((p, i) => (
+          <article class="card card-hover spotlight reveal flex flex-col p-6" style={`--delay: ${(i % 3) * 60}ms`}>
+            <div class="relative flex items-center justify-between gap-3">
+              <span class:list={['rounded-full px-2 py-0.5 font-mono text-[11px] tracking-wide uppercase', statusStyle[p.status]]}>
+                {p.status}
+              </span>
+              <span class="font-mono text-xs text-subtle">{p.year}</span>
+            </div>
+            <h3 class="relative mt-5 text-lg font-semibold tracking-tight">{p.name}</h3>
+            <p class="relative mt-1 text-sm text-ink/80">{p.blurb}</p>
+            <div class="relative mt-4 space-y-2 text-sm leading-relaxed text-muted">
+              {p.details.map((d) => (
+                <p>{d}</p>
+              ))}
+            </div>
+            <div class="relative mt-auto pt-5">
+              <div class="flex flex-wrap gap-1.5">
+                {p.stack.map((s) => (
+                  <span class="chip text-xs">{s}</span>
+                ))}
+              </div>
+              {p.links && (
+                <div class="mt-4 flex gap-4 text-sm">
+                  {p.links.map((l) => (
+                    <a href={l.href} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-ink hover:text-accent">
+                      <Icon name="github" size={15} />
+                      {l.label}
+                      <Icon name="external" size={13} class="text-subtle" />
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          </article>
+        ))
+      }
+      <a
+        href="https://github.com/itsvishalcodes"
+        target="_blank"
+        rel="noopener"
+        class="reveal group flex min-h-48 flex-col items-center justify-center gap-3 rounded-[1.25rem] border border-dashed border-line-strong p-6 text-center text-muted transition-colors hover:border-accent hover:text-ink"
+        style="--delay: 120ms"
+      >
+        <Icon name="github" size={28} />
+        <span class="font-medium">More on GitHub</span>
+        <span class="inline-flex items-center gap-1 text-sm text-subtle group-hover:text-accent">
+          @itsvishalcodes <Icon name="arrow" size={14} />
+        </span>
+      </a>
+    </div>
+
+    <div class="reveal mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-subtle">
+      <span class="eyebrow">From college</span>
+      {
+        earlier.map((e) => (
+          <a href={e.href} target="_blank" rel="noopener" class="link-underline text-muted hover:text-ink">
+            {e.name} <span class="text-subtle">· {e.stack}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

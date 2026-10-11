@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://portfolio.itsvishalcodes.com/sitemap-index.xml

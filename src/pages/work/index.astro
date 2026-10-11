@@ -1,0 +1,82 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import WorkCard from '../../components/WorkCard.astro';
+import Icon from '../../components/Icon.astro';
+import { AREAS } from '../../content.config';
+
+const all = (await getCollection('work')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const counts = Object.fromEntries(AREAS.map((a) => [a, all.filter((e) => e.data.areas.includes(a)).length]));
+---
+
+<Base
+  title="Work"
+  description="Case studies from Vishal Tiwari's four years at Optmyzr — reliability, AI features, ad platform integrations and product launches."
+>
+  <section class="relative overflow-hidden">
+    <div class="grid-bg pointer-events-none absolute inset-0" aria-hidden="true"></div>
+    <div class="container-x relative pt-14 pb-12 sm:pt-20">
+      <a href="/" class="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink">
+        <Icon name="back" size={16} /> Home
+      </a>
+      <h1 class="reveal mt-6 text-4xl font-semibold tracking-tight sm:text-5xl">All work</h1>
+      <p class="reveal mt-4 max-w-2xl text-lg leading-relaxed text-muted" style="--delay: 60ms">
+        {all.length} case studies, newest first. Filter by the kind of engineering you care about.
+      </p>
+
+      <div data-filter-bar class="reveal mt-8 flex flex-wrap items-center gap-2" style="--delay: 120ms" role="group" aria-label="Filter by area">
+        <button type="button" data-area="All" aria-pressed="true" class="filter-btn">
+          All <span class="text-subtle">{all.length}</span>
+        </button>
+        {
+          AREAS.map((a) => (
+            <button type="button" data-area={a} aria-pressed="false" class="filter-btn">
+              {a} <span class="text-subtle">{counts[a]}</span>
+            </button>
+          ))
+        }
+        <span class="ml-auto hidden font-mono text-xs text-subtle sm:inline">
+          Showing <span data-filter-count>{all.length}</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-24 sm:pb-32">
+    <div class="container-x grid gap-5 md:grid-cols-2">
+      {all.map((entry, i) => <WorkCard entry={entry} delay={(i % 2) * 60} />)}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    height: 2.25rem;
+    padding-inline: 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 0.875rem;
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease,
+      background-color 0.2s ease;
+  }
+  .filter-btn:hover {
+    border-color: var(--border-strong);
+    color: var(--text);
+  }
+  .filter-btn[aria-pressed='true'] {
+    background: var(--text);
+    border-color: var(--text);
+    color: var(--bg);
+  }
+  .filter-btn[aria-pressed='true'] span {
+    color: inherit;
+    opacity: 0.6;
+  }
+</style>

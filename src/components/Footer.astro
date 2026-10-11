@@ -1,0 +1,30 @@
+---
+import Icon from './Icon.astro';
+import { site, socials } from '../data/site';
+---
+
+<footer class="border-t border-line">
+  <div class="container-x flex flex-col gap-6 py-10 text-sm text-subtle sm:flex-row sm:items-center sm:justify-between">
+    <p>
+      © <span data-year>2026</span>
+      {site.name}. Built with
+      <a class="link-underline text-muted hover:text-ink" href="https://astro.build">Astro</a>, hosted on GitHub Pages.
+    </p>
+    <ul class="flex items-center gap-1">
+      {
+        socials.map((s) => (
+          <li>
+            <a
+              href={s.href}
+              aria-label={s.label}
+              class="grid size-9 place-items-center rounded-full text-muted transition-colors hover:bg-surface-2 hover:text-ink"
+              {...(s.href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}
+            >
+              <Icon name={s.icon} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>

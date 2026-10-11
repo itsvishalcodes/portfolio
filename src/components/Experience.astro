@@ -1,0 +1,90 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import Icon from './Icon.astro';
+import { roles, journey } from '../data/experience';
+---
+
+<section id="experience" class="py-24 sm:py-32">
+  <div class="container-x">
+    <SectionHeading
+      index="02"
+      label="Experience"
+      title="Four years, one company, a lot of ground."
+      lead="I joined Optmyzr as an intern in 2022 and have worked across nearly every layer of the product since — from the React apps agencies click on to the daemons that talk to ad platforms overnight."
+    />
+
+    <div class="grid gap-12 lg:grid-cols-[1fr_22rem] lg:gap-16">
+      <!-- Roles -->
+      <ol class="space-y-6">
+        {
+          roles.map((r, i) => (
+            <li class="card reveal p-6 sm:p-8" style={`--delay: ${i * 60}ms`}>
+              <div class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+                <div>
+                  <h3 class="text-xl font-semibold tracking-tight">{r.title}</h3>
+                  <p class="mt-1 text-muted">
+                    {r.orgUrl ? (
+                      <a href={r.orgUrl} target="_blank" rel="noopener" class="link-underline text-ink">
+                        {r.org}
+                      </a>
+                    ) : (
+                      <span class="text-ink">{r.org}</span>
+                    )}
+                    <span class="text-subtle"> · {r.location}</span>
+                  </p>
+                </div>
+                <p class="shrink-0 font-mono text-sm text-subtle sm:pt-1">{r.period}</p>
+              </div>
+              <p class="mt-4 leading-relaxed text-muted">{r.summary}</p>
+              <ul class="mt-5 space-y-2.5">
+                {r.highlights.map((h) => (
+                  <li class="relative pl-6 leading-relaxed text-muted">
+                    <span class="absolute top-[0.7em] left-1 h-0.5 w-2 rounded bg-accent" />
+                    {h}
+                  </li>
+                ))}
+              </ul>
+              <div class="mt-6 flex flex-wrap gap-1.5">
+                {r.stack.map((s) => (
+                  <span class="chip">{s}</span>
+                ))}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <!-- Journey timeline -->
+      <aside aria-labelledby="journey-title" class="reveal lg:sticky lg:top-24 lg:self-start">
+        <h3 id="journey-title" class="eyebrow mb-6">The journey · 2022 → 2026</h3>
+        <ol class="relative space-y-8 border-l border-line pl-6">
+          {
+            journey.map((y) => (
+              <li class="relative">
+                <span class="absolute top-1 -left-[1.95rem] grid size-4 place-items-center rounded-full border border-line-strong bg-bg">
+                  <span class="size-1.5 rounded-full bg-accent" />
+                </span>
+                <p class="font-mono text-sm font-semibold text-ink">{y.year}</p>
+                <ul class="mt-3 space-y-2.5">
+                  {y.items.map((m) => (
+                    <li class="grid grid-cols-[4.25rem_1fr] gap-2 text-sm leading-snug">
+                      <span class="font-mono text-xs text-subtle pt-0.5">{m.when}</span>
+                      {m.slug ? (
+                        <a href={`/work/${m.slug}/`} class="group text-muted transition-colors hover:text-ink">
+                          {m.text}
+                          <Icon name="arrow" size={12} class="ml-1 inline -translate-y-px opacity-0 transition-opacity group-hover:opacity-100" />
+                        </a>
+                      ) : (
+                        <span class="text-muted">{m.text}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))
+          }
+        </ol>
+      </aside>
+    </div>
+  </div>
+</section>
