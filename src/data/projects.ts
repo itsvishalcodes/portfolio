@@ -1,3 +1,5 @@
+import type { IconName } from './site';
+
 export type Project = {
   name: string;
   blurb: string;
@@ -5,9 +7,10 @@ export type Project = {
   stack: string[];
   status: 'Live' | 'Building' | 'Shipped' | 'Retired' | 'Open source';
   year: string;
-  // Detail page at /projects/<slug>/. Makes the whole card a link, so it replaces `links`.
+  // Detail page at /projects/<slug>/. Makes the whole card a link.
   slug?: string;
-  links?: { label: string; href: string }[];
+  // External links; the icon defaults to GitHub.
+  links?: { label: string; href: string; icon?: IconName }[];
 };
 
 export const projects: Project[] = [
@@ -22,6 +25,7 @@ export const projects: Project[] = [
     status: 'Live',
     year: '2021 · 2026',
     slug: 'lpu-retouched',
+    links: [{ label: 'Google Play', href: 'https://play.google.com/store/apps/details?id=com.lpuretouched', icon: 'play' }],
   },
   {
     name: 'Slate',

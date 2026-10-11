@@ -7,7 +7,7 @@ export const site = {
   focus: 'Backend · Distributed systems · Frontend',
   company: 'Optmyzr',
   location: 'Gurgaon, India',
-  email: 'itsvishalcodes@gmail.com',
+  email: 'contact@itsvishalcodes.com',
   url: 'https://portfolio.itsvishalcodes.com',
   // Put a PDF in /public and set e.g. '/Vishal-Tiwari-Resume.pdf' to show a Résumé button.
   resumeUrl: '',
@@ -16,13 +16,13 @@ export const site = {
 };
 
 export type Social = { label: string; href: string; handle: string; icon: IconName };
-export type IconName = 'github' | 'linkedin' | 'leetcode' | 'mail' | 'arrow' | 'external' | 'sun' | 'moon' | 'copy' | 'check' | 'menu' | 'close' | 'pin' | 'back';
+export type IconName = 'github' | 'linkedin' | 'leetcode' | 'mail' | 'arrow' | 'external' | 'sun' | 'moon' | 'copy' | 'check' | 'menu' | 'close' | 'pin' | 'back' | 'play';
 
 export const socials: Social[] = [
   { label: 'GitHub', href: 'https://github.com/itsvishalcodes', handle: '@itsvishalcodes', icon: 'github' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/itsvishalcodes', handle: 'in/itsvishalcodes', icon: 'linkedin' },
   { label: 'LeetCode', href: 'https://leetcode.com/u/itsvishalcodes/', handle: '@itsvishalcodes', icon: 'leetcode' },
-  { label: 'Email', href: 'mailto:itsvishalcodes@gmail.com', handle: 'itsvishalcodes@gmail.com', icon: 'mail' },
+  { label: 'Email', href: `mailto:${site.email}`, handle: site.email, icon: 'mail' },
 ];
 
 export const stats = [

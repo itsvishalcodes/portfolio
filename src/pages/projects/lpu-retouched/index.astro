@@ -30,6 +30,19 @@ const stack = ['React Native', 'Expo SDK 57', 'JavaScript', 'React Navigation', 
           servers.
         </p>
 
+        <div class="reveal mt-8 flex flex-wrap gap-3" style="--delay: 150ms">
+          {
+            project.links?.map((l) => (
+              <a href={l.href} target="_blank" rel="noopener" class="btn btn-primary">
+                {l.icon && <Icon name={l.icon} size={16} />}
+                {l.label}
+                <Icon name="external" size={14} />
+              </a>
+            ))
+          }
+          <a href={policyHref} class="btn btn-ghost">Privacy policy</a>
+        </div>
+
         <dl class="reveal mt-10 grid gap-6 border-t border-line pt-8 sm:grid-cols-3" style="--delay: 180ms">
           <div>
             <dt class="eyebrow">When</dt>
@@ -114,12 +127,6 @@ const stack = ['React Native', 'Expo SDK 57', 'JavaScript', 'React Navigation', 
               {stack.map((s) => <li class="chip text-xs">{s}</li>)}
             </ul>
           </div>
-          <a href={policyHref} class="card card-hover group block p-5">
-            <p class="eyebrow">Legal</p>
-            <p class="mt-2 inline-flex items-center gap-1.5 font-medium transition-colors group-hover:text-accent">
-              Privacy policy <Icon name="arrow" size={14} class="transition-transform group-hover:translate-x-0.5" />
-            </p>
-          </a>
         </aside>
       </div>
     </div>
