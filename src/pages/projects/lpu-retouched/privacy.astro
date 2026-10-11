@@ -1,0 +1,82 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Icon from '../../../components/Icon.astro';
+
+// Linked from the app's Google Play listing. Keep this URL stable.
+const contact = 'contact@itsvishalcodes.com';
+---
+
+<Base
+  title="LPU Touch privacy policy"
+  description="How the LPU Touch Android app handles your data: no backend, no ads, no analytics. Your UMS login goes only to the university’s servers."
+>
+  <article class="container-x max-w-3xl py-14 sm:py-20">
+    <a href="/projects/lpu-retouched/" class="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink">
+      <Icon name="back" size={16} /> About the app
+    </a>
+    <h1 class="mt-8 text-4xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-5xl">LPU Touch — Privacy Policy</h1>
+    <p class="mt-4 font-mono text-sm text-subtle">Last updated: <time datetime="2026-10-12">12 October 2026</time></p>
+
+    <div class="prose-case mt-10">
+      <p>
+        LPU Touch (the “App”) is an independent, student-built client for Lovely Professional University’s UMS student portal. It
+        is not an official app of, and is not endorsed by or affiliated with, the university. This policy explains what data the
+        App handles and how.
+      </p>
+
+      <h2>Who processes your data</h2>
+      <p>
+        The App has <strong>no backend of its own</strong>. It is only a client: all data flows directly between your device and
+        the university’s own servers (<code>ums.lpu.in</code>). The developer does not operate any server that receives, stores,
+        or has access to your data, and does not sell your data.
+      </p>
+
+      <h2>What the App collects and why</h2>
+      <ul>
+        <li>
+          <strong>Login credentials (Registration/Unique ID and password).</strong> Entered by you and sent over an encrypted
+          (HTTPS) connection to the university’s servers solely to sign you in. They are stored locally on your device so you stay
+          signed in, and are removed when you log out or uninstall the App.
+        </li>
+        <li>
+          <strong>Device identifier (Android ID).</strong> Sent with your login to the university’s servers as part of their
+          session/device handling.
+        </li>
+        <li>
+          <strong>Your academic information</strong> (attendance, marks, timetable, results, messages, announcements, profile and
+          photo) is retrieved from the university’s servers and shown to you in the App. It is not sent anywhere else and is not
+          collected by the developer.
+        </li>
+      </ul>
+
+      <h2>What the App does NOT do</h2>
+      <ul>
+        <li>No advertising and no advertising ID.</li>
+        <li>No third-party analytics or tracking SDKs.</li>
+        <li>
+          No sharing or selling of your data to any third party. Data is sent only to the university’s own servers to provide the
+          service you request.
+        </li>
+      </ul>
+
+      <h2>Data security</h2>
+      <p>All communication with the university’s servers uses HTTPS. Credentials cached on your device remain on your device.</p>
+
+      <h2>Data retention and deletion</h2>
+      <p>
+        Data stored by the App is limited to the login details cached on your device; clearing it is as simple as logging out or
+        uninstalling the App. Your academic records are held by the university in its own systems — to access, correct, or delete
+        those, contact the university directly.
+      </p>
+
+      <h2>Children</h2>
+      <p>The App is intended for enrolled university students and is not directed at children under 13.</p>
+
+      <h2>Changes</h2>
+      <p>This policy may be updated; the “Last updated” date above will change accordingly.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about this policy: <a href={`mailto:${contact}`}>{contact}</a></p>
+    </div>
+  </article>
+</Base>

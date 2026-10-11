@@ -5,6 +5,8 @@ export type Project = {
   stack: string[];
   status: 'Live' | 'Building' | 'Shipped' | 'Retired' | 'Open source';
   year: string;
+  // Detail page at /projects/<slug>/. Makes the whole card a link, so it replaces `links`.
+  slug?: string;
   links?: { label: string; href: string }[];
 };
 
@@ -14,11 +16,12 @@ export const projects: Project[] = [
     blurb: 'A faster, friendlier rebuild of my university’s student app.',
     details: [
       'The official app had no public API, so I proxied its traffic with Fiddler, worked out the private endpoints, and rebuilt the student experience in React Native.',
-      'Reached 150+ downloads and a 4★ rating from 24 reviews on the Play Store.',
+      'Reached 150+ downloads and a 4★ rating from 24 reviews on the Play Store. Rebuilt on Expo in 2026.',
     ],
-    stack: ['React Native', 'REST', 'Reverse engineering'],
-    status: 'Retired',
-    year: '2021',
+    stack: ['React Native', 'Expo', 'REST', 'Reverse engineering'],
+    status: 'Live',
+    year: '2021 · 2026',
+    slug: 'lpu-retouched',
   },
   {
     name: 'Slate',

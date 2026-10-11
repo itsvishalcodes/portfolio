@@ -1,0 +1,127 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Icon from '../../../components/Icon.astro';
+import { projects } from '../../../data/projects';
+
+const project = projects.find((p) => p.slug === 'lpu-retouched')!;
+const policyHref = '/projects/lpu-retouched/privacy/';
+const stack = ['React Native', 'Expo SDK 57', 'JavaScript', 'React Navigation', 'AsyncStorage', 'crypto-js', 'Fiddler', 'EAS Build'];
+---
+
+<Base title={project.name} description={`${project.blurb} An independent Android client for LPU's UMS student portal.`}>
+  <article>
+    <header class="relative overflow-hidden border-b border-line">
+      <div class="grid-bg pointer-events-none absolute inset-0" aria-hidden="true"></div>
+      <div class="glow-orb -top-48 left-1/3 h-80 w-[36rem] opacity-70" aria-hidden="true"></div>
+      <div class="container-x relative max-w-4xl pt-14 pb-14 sm:pt-20">
+        <a href="/#projects" class="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink">
+          <Icon name="back" size={16} /> All projects
+        </a>
+        <div class="reveal mt-8 flex flex-wrap gap-1.5">
+          <span class="tag">Side project</span>
+          <span class="tag">Android</span>
+          <span class="tag">{project.status}</span>
+        </div>
+        <h1 class="reveal mt-5 text-4xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-5xl" style="--delay: 60ms">
+          {project.name}
+        </h1>
+        <p class="reveal mt-5 text-lg leading-relaxed text-pretty text-muted sm:text-xl" style="--delay: 120ms">
+          {project.blurb} Attendance, timetable, marks, results, messages and announcements, straight from the university’s own
+          servers.
+        </p>
+
+        <dl class="reveal mt-10 grid gap-6 border-t border-line pt-8 sm:grid-cols-3" style="--delay: 180ms">
+          <div>
+            <dt class="eyebrow">When</dt>
+            <dd class="mt-2 text-ink">2021, revived in 2026</dd>
+          </div>
+          <div>
+            <dt class="eyebrow">Role</dt>
+            <dd class="mt-2 text-ink">Solo: reverse engineering, design, build</dd>
+          </div>
+          <div>
+            <dt class="eyebrow">Context</dt>
+            <dd class="mt-2 text-ink">Independent student project</dd>
+          </div>
+        </dl>
+      </div>
+    </header>
+
+    <div class="container-x max-w-4xl py-14 sm:py-16">
+      <div class="grid gap-12 lg:grid-cols-[1fr_14rem]">
+        <div class="prose-case min-w-0">
+          <h2>Why I built it</h2>
+          <p>
+            Every student at Lovely Professional University lives in UMS, the university’s portal: attendance, the timetable,
+            marks, results, messages from faculty, announcements. In 2021 I wanted a faster, friendlier way to check all of it on
+            my phone, so I built one.
+          </p>
+
+          <h2>How it works</h2>
+          <ul>
+            <li>
+              <strong>No public API.</strong> UMS doesn’t document one, so I proxied the official app’s traffic through Fiddler,
+              mapped the private endpoints it calls, and rebuilt the student experience on top of them in React Native.
+            </li>
+            <li>
+              <strong>No backend of mine.</strong> The app is only a client. It talks straight to the university’s servers
+              (<code>ums.lpu.in</code>) over HTTPS. There is no server in between, and none of your data reaches me.
+            </li>
+            <li>
+              <strong>One module for every UMS call.</strong> The endpoints don’t agree on argument order, so every request goes
+              through a single API layer that takes the whole session, instead of each screen building its own URL.
+            </li>
+          </ul>
+
+          <h2>What’s in it</h2>
+          <ul>
+            <li>A dashboard with your upcoming lectures and attendance at a glance</li>
+            <li>Attendance, timetable, marks and results</li>
+            <li>Messages and university announcements</li>
+          </ul>
+
+          <h2>2021, and again in 2026</h2>
+          <p>
+            The first version went up on the Play Store in early 2021 and reached 150+ downloads and a 4★ rating from 24 reviews
+            before I retired it.
+          </p>
+          <p>In 2026 I brought it back as <strong>LPU Touch</strong>:</p>
+          <ul>
+            <li>Rebuilt on Expo SDK 57 so it meets current Play Store requirements.</li>
+            <li>Moved login to the encrypted gateway the university’s newer app now uses.</li>
+            <li>Cleared out dead code and fixed several correctness bugs.</li>
+          </ul>
+
+          <h2>Privacy</h2>
+          <p>
+            No ads, no analytics, no backend. Your UMS login goes only to the university’s servers, over HTTPS, and is kept on
+            your device so you stay signed in. The <a href={policyHref}>privacy policy</a> has the details.
+          </p>
+          <p>
+            LPU Touch is an independent student project. It is not an official app of, and is not endorsed by or affiliated with,
+            Lovely Professional University.
+          </p>
+        </div>
+
+        <aside class="space-y-8 lg:sticky lg:top-24 lg:self-start">
+          <div class="card p-5">
+            <p class="text-3xl font-semibold tracking-tight text-accent">4★</p>
+            <p class="mt-2 text-sm leading-snug text-muted">from 24 reviews and 150+ downloads on the Play Store (2021)</p>
+          </div>
+          <div>
+            <p class="eyebrow">Stack</p>
+            <ul class="mt-3 flex flex-wrap gap-1.5">
+              {stack.map((s) => <li class="chip text-xs">{s}</li>)}
+            </ul>
+          </div>
+          <a href={policyHref} class="card card-hover group block p-5">
+            <p class="eyebrow">Legal</p>
+            <p class="mt-2 inline-flex items-center gap-1.5 font-medium transition-colors group-hover:text-accent">
+              Privacy policy <Icon name="arrow" size={14} class="transition-transform group-hover:translate-x-0.5" />
+            </p>
+          </a>
+        </aside>
+      </div>
+    </div>
+  </article>
+</Base>

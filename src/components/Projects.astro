@@ -23,41 +23,55 @@ const statusStyle: Record<string, string> = {
 
     <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
       {
-        projects.map((p, i) => (
-          <article class="card card-hover spotlight reveal flex flex-col p-6" style={`--delay: ${(i % 3) * 60}ms`}>
-            <div class="relative flex items-center justify-between gap-3">
-              <span class:list={['rounded-full px-2 py-0.5 font-mono text-[11px] tracking-wide uppercase', statusStyle[p.status]]}>
-                {p.status}
-              </span>
-              <span class="font-mono text-xs text-subtle">{p.year}</span>
-            </div>
-            <h3 class="relative mt-5 text-lg font-semibold tracking-tight">{p.name}</h3>
-            <p class="relative mt-1 text-sm text-ink/80">{p.blurb}</p>
-            <div class="relative mt-4 space-y-2 text-sm leading-relaxed text-muted">
-              {p.details.map((d) => (
-                <p>{d}</p>
-              ))}
-            </div>
-            <div class="relative mt-auto pt-5">
-              <div class="flex flex-wrap gap-1.5">
-                {p.stack.map((s) => (
-                  <span class="chip text-xs">{s}</span>
+        projects.map((p, i) => {
+          const Card = p.slug ? 'a' : 'article';
+          return (
+            <Card
+              href={p.slug && `/projects/${p.slug}/`}
+              class="card card-hover spotlight reveal group flex flex-col p-6"
+              style={`--delay: ${(i % 3) * 60}ms`}
+            >
+              <div class="relative flex items-center justify-between gap-3">
+                <span class:list={['rounded-full px-2 py-0.5 font-mono text-[11px] tracking-wide uppercase', statusStyle[p.status]]}>
+                  {p.status}
+                </span>
+                <span class="font-mono text-xs text-subtle">{p.year}</span>
+              </div>
+              <h3 class:list={['relative mt-5 text-lg font-semibold tracking-tight', p.slug && 'transition-colors group-hover:text-accent']}>
+                {p.name}
+              </h3>
+              <p class="relative mt-1 text-sm text-ink/80">{p.blurb}</p>
+              <div class="relative mt-4 space-y-2 text-sm leading-relaxed text-muted">
+                {p.details.map((d) => (
+                  <p>{d}</p>
                 ))}
               </div>
-              {p.links && (
-                <div class="mt-4 flex gap-4 text-sm">
-                  {p.links.map((l) => (
-                    <a href={l.href} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-ink hover:text-accent">
-                      <Icon name="github" size={15} />
-                      {l.label}
-                      <Icon name="external" size={13} class="text-subtle" />
-                    </a>
+              <div class="relative mt-auto pt-5">
+                <div class="flex flex-wrap gap-1.5">
+                  {p.stack.map((s) => (
+                    <span class="chip text-xs">{s}</span>
                   ))}
                 </div>
-              )}
-            </div>
-          </article>
-        ))
+                {p.slug ? (
+                  <span class="mt-4 inline-flex items-center gap-1.5 text-sm text-ink transition-colors group-hover:text-accent">
+                    About the app
+                    <Icon name="arrow" size={14} class="transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                ) : p.links && (
+                  <div class="mt-4 flex gap-4 text-sm">
+                    {p.links.map((l) => (
+                      <a href={l.href} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-ink hover:text-accent">
+                        <Icon name="github" size={15} />
+                        {l.label}
+                        <Icon name="external" size={13} class="text-subtle" />
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </Card>
+          );
+        })
       }
       <a
         href="https://github.com/itsvishalcodes"
