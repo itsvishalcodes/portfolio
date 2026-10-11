@@ -29,7 +29,7 @@ Needs Node 22.12+. Run `npm install` once after cloning.
 | A side project | `src/data/projects.ts` |
 | An achievement (contest rank, certification, award) | `src/data/education.ts` → `achievements` |
 | Education, community roles | `src/data/education.ts` |
-| A role, or an entry on the 2022 → now timeline | `src/data/experience.ts` → `roles` / `journey` |
+| A role, or an entry on the 2022 → now timeline | `src/data/experience.ts` → `roles` (each role’s `journey`, newest first) |
 | A piece of work with its own page | a new file in `src/content/work/` |
 | The “How I work” principles | `src/data/principles.ts` |
 | Skills | `src/data/skills.ts` |

@@ -1,7 +1,11 @@
 ---
 import SectionHeading from './SectionHeading.astro';
 import Icon from './Icon.astro';
-import { roles, journey } from '../data/experience';
+import { roles } from '../data/experience';
+
+// The timeline is split by role; these decide where its label and its end go.
+const firstJourney = roles.findIndex((r) => r.journey);
+const lastJourney = roles.findLastIndex((r) => r.journey);
 ---
 
 <section id="experience" class="py-24 sm:py-32">
@@ -13,12 +17,11 @@ import { roles, journey } from '../data/experience';
       lead="I joined Optmyzr as an intern in 2022 and have since worked across nearly every layer of a multi-tenant B2B platform — background workers and queues, service APIs, data stores, and the React applications customers use every day."
     />
 
-    <div class="grid gap-12 lg:grid-cols-[1fr_22rem] lg:gap-16">
-      <!-- Roles -->
-      <ol class="space-y-6">
-        {
-          roles.map((r, i) => (
-            <li class="card reveal p-6 sm:p-8" style={`--delay: ${i * 60}ms`}>
+    <ol class="space-y-6">
+      {
+        roles.map((r, i) => (
+          <li class="grid gap-x-16 gap-y-8 lg:grid-cols-[1fr_22rem]">
+            <div class="card reveal p-6 sm:p-8" style={`--delay: ${i * 60}ms`}>
               <div class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
                 <div>
                   <h3 class="text-xl font-semibold tracking-tight">{r.title}</h3>
@@ -50,42 +53,48 @@ import { roles, journey } from '../data/experience';
                   <span class="chip">{s}</span>
                 ))}
               </div>
-            </li>
-          ))
-        }
-      </ol>
+            </div>
 
-      <!-- Journey timeline -->
-      <aside aria-labelledby="journey-title" class="reveal lg:sticky lg:top-24 lg:self-start">
-        <h3 id="journey-title" class="eyebrow mb-6">The journey · 2022 → 2026</h3>
-        <ol class="relative space-y-8 border-l border-line pl-6">
-          {
-            journey.map((y) => (
-              <li class="relative">
-                <span class="absolute top-1 -left-[1.95rem] grid size-4 place-items-center rounded-full border border-line-strong bg-bg">
-                  <span class="size-1.5 rounded-full bg-accent" />
-                </span>
-                <p class="font-mono text-sm font-semibold text-ink">{y.year}</p>
-                <ul class="mt-3 space-y-2.5">
-                  {y.items.map((m) => (
-                    <li class="grid grid-cols-[4.25rem_1fr] gap-2 text-sm leading-snug">
-                      <span class="font-mono text-xs text-subtle pt-0.5">{m.when}</span>
-                      {m.slug ? (
-                        <a href={`/work/${m.slug}/`} class="group text-muted transition-colors hover:text-ink">
-                          {m.text}
-                          <Icon name="arrow" size={12} class="ml-1 inline -translate-y-px opacity-0 transition-opacity group-hover:opacity-100" />
-                        </a>
-                      ) : (
-                        <span class="text-muted">{m.text}</span>
-                      )}
+            {r.journey && (
+              <div class="reveal flex flex-col pb-2 lg:pt-1 lg:pb-0" style={`--delay: ${i * 60 + 120}ms`}>
+                {i === firstJourney && <p class="eyebrow mb-6">The journey · 2022 – 2026</p>}
+                <ol
+                  aria-label={`Timeline: ${r.title}`}
+                  class:list={[
+                    'relative space-y-8 border-l border-line pl-6',
+                    // Run the line through the gap to the next role so the timeline reads as one.
+                    i !== lastJourney && 'lg:-mb-6 lg:flex-1',
+                  ]}
+                >
+                  {r.journey.map((y) => (
+                    <li class="relative">
+                      <span class="absolute top-1 -left-[1.95rem] grid size-4 place-items-center rounded-full border border-line-strong bg-bg">
+                        <span class="size-1.5 rounded-full bg-accent" />
+                      </span>
+                      <p class="font-mono text-sm font-semibold text-ink">{y.year}</p>
+                      <ul class="mt-3 space-y-2.5">
+                        {y.items.map((m) => (
+                          <li class="grid grid-cols-[4.25rem_1fr] gap-2 text-sm leading-snug">
+                            <span class="font-mono text-xs text-subtle pt-0.5">{m.when}</span>
+                            {m.slug ? (
+                              <a href={`/work/${m.slug}/`} class="group text-muted transition-colors hover:text-ink">
+                                {m.text}
+                                <Icon name="arrow" size={12} class="ml-1 inline -translate-y-px opacity-0 transition-opacity group-hover:opacity-100" />
+                              </a>
+                            ) : (
+                              <span class="text-muted">{m.text}</span>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
                     </li>
                   ))}
-                </ul>
-              </li>
-            ))
-          }
-        </ol>
-      </aside>
-    </div>
+                </ol>
+              </div>
+            )}
+          </li>
+        ))
+      }
+    </ol>
   </div>
 </section>

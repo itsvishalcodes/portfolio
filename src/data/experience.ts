@@ -1,3 +1,5 @@
+export type Milestone = { when: string; text: string; slug?: string };
+
 export type Role = {
   title: string;
   org: string;
@@ -8,6 +10,8 @@ export type Role = {
   summary: string;
   highlights: string[];
   stack: string[];
+  // Timeline shown beside the role's card, newest first. `slug` links a case study.
+  journey?: { year: string; items: Milestone[] }[];
 };
 
 export const roles: Role[] = [
@@ -31,6 +35,43 @@ export const roles: Role[] = [
       'Primary on-call rotation and incident ownership; mentored an intern and a junior engineer; regular reviewer on other teams’ designs and code; joined enterprise-customer calls to scope requirements.',
     ],
     stack: ['C# / .NET', 'TypeScript', 'React', 'Redux', 'Redis', 'MySQL', 'MongoDB', 'AWS', 'PHP', 'LLM APIs'],
+    journey: [
+      {
+        year: '2026',
+        items: [
+          { when: 'Sep–Oct', text: 'Cost-bounded LLM verification service (hackathon)', slug: 'smart-url-checker' },
+          { when: 'Sep', text: 'One symptom, three root causes: enterprise escalations', slug: 'enterprise-escalation-rca' },
+          { when: 'Aug', text: 'Async media pipeline · partial-failure reconciliation', slug: 'async-media-pipeline' },
+          { when: 'Jul', text: 'Two diverged React codebases merged into one', slug: 'repo-consolidation' },
+          { when: 'Jun', text: 'LLM tool-calling across every platform', slug: 'ai-in-production' },
+          { when: 'Mar–Jun', text: 'Async bulk onboarding for a company-wide product merger', slug: 'search-social-merger' },
+        ],
+      },
+      {
+        year: '2025',
+        items: [
+          { when: 'Jun', text: 'Portfolio dashboard out of beta', slug: 'all-portfolio-dashboard' },
+          { when: 'Apr–Jun', text: 'Solo feature from PRD to production', slug: 'custom-audiences' },
+          { when: 'Mar', text: '10.8 TB of storage put on lifecycle policies', slug: 's3-storage' },
+        ],
+      },
+      {
+        year: '2024',
+        items: [
+          { when: 'Nov', text: 'Started the multi-tenant portfolio dashboard', slug: 'all-portfolio-dashboard' },
+          { when: 'May–Sep', text: 'Rate-limit backoff, adaptive concurrency, fault isolation', slug: 'pipeline-resilience' },
+          { when: 'Jan–Feb', text: 'Migrated a second platform’s pipeline onto the shared data cache', slug: 'data-cache-migration' },
+        ],
+      },
+      {
+        year: '2023',
+        items: [
+          { when: 'Sep', text: 'One navigation system on every page', slug: 'unified-navigation' },
+          { when: 'Jul', text: 'Pipeline run monitoring and daily failure reports', slug: 'pipeline-resilience' },
+          { when: 'Jun', text: 'Converted to full-time · React-in-PHP navigation in beta', slug: 'unified-navigation' },
+        ],
+      },
+    ],
   },
   {
     title: 'Software Engineer Intern',
@@ -46,6 +87,19 @@ export const roles: Role[] = [
       'Built the company marketing site’s dynamic templates on Hugo with CRM integration, removing engineering from the content team’s publishing path.',
     ],
     stack: ['React', 'Redux', 'C# / .NET', 'Webpack', 'PHP', 'Hugo'],
+    journey: [
+      {
+        year: '2023',
+        items: [{ when: 'Mar', text: 'Product launched to all users; legacy tool retired', slug: 'express-v2' }],
+      },
+      {
+        year: '2022',
+        items: [
+          { when: 'Aug', text: 'Started building a new product, 0 → 1', slug: 'express-v2' },
+          { when: 'Apr', text: 'Joined Optmyzr as a software engineer intern' },
+        ],
+      },
+    ],
   },
   {
     title: 'Freelance Developer',
@@ -55,53 +109,5 @@ export const roles: Role[] = [
     summary: 'Scoped, built and supported paid client work on my own before my first full-time role.',
     highlights: ['Built and maintained a WordPress / PHP e-commerce storefront for a private client.'],
     stack: ['WordPress', 'PHP', 'MySQL'],
-  },
-];
-
-// Four years at a glance — shown as a timeline on the home page.
-export type Milestone = { when: string; text: string; slug?: string };
-export const journey: { year: string; items: Milestone[] }[] = [
-  {
-    year: '2022',
-    items: [
-      { when: 'Apr', text: 'Joined Optmyzr as a software engineer intern' },
-      { when: 'Aug', text: 'Started building a new product, 0 → 1', slug: 'express-v2' },
-    ],
-  },
-  {
-    year: '2023',
-    items: [
-      { when: 'Mar', text: 'Product launched to all users; legacy tool retired', slug: 'express-v2' },
-      { when: 'Jun', text: 'Converted to full-time · React-in-PHP navigation in beta', slug: 'unified-navigation' },
-      { when: 'Jul', text: 'Pipeline run monitoring and daily failure reports', slug: 'pipeline-resilience' },
-      { when: 'Sep', text: 'One navigation system on every page', slug: 'unified-navigation' },
-    ],
-  },
-  {
-    year: '2024',
-    items: [
-      { when: 'Jan–Feb', text: 'Migrated a second platform’s pipeline onto the shared data cache', slug: 'data-cache-migration' },
-      { when: 'May–Sep', text: 'Rate-limit backoff, adaptive concurrency, fault isolation', slug: 'pipeline-resilience' },
-      { when: 'Nov', text: 'Started the multi-tenant portfolio dashboard', slug: 'all-portfolio-dashboard' },
-    ],
-  },
-  {
-    year: '2025',
-    items: [
-      { when: 'Mar', text: '10.8 TB of storage put on lifecycle policies', slug: 's3-storage' },
-      { when: 'Apr–Jun', text: 'Solo feature from PRD to production', slug: 'custom-audiences' },
-      { when: 'Jun', text: 'Portfolio dashboard out of beta', slug: 'all-portfolio-dashboard' },
-    ],
-  },
-  {
-    year: '2026',
-    items: [
-      { when: 'Mar–Jun', text: 'Async bulk onboarding for a company-wide product merger', slug: 'search-social-merger' },
-      { when: 'Jun', text: 'LLM tool-calling across every platform', slug: 'ai-in-production' },
-      { when: 'Jul', text: 'Two diverged React codebases merged into one', slug: 'repo-consolidation' },
-      { when: 'Aug', text: 'Async media pipeline · partial-failure reconciliation', slug: 'async-media-pipeline' },
-      { when: 'Sep', text: 'One symptom, three root causes: enterprise escalations', slug: 'enterprise-escalation-rca' },
-      { when: 'Sep–Oct', text: 'Cost-bounded LLM verification service (hackathon)', slug: 'smart-url-checker' },
-    ],
   },
 ];
