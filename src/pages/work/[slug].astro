@@ -2,6 +2,9 @@
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
+import PipelineDiagram from '../../components/diagrams/PipelineDiagram.astro';
+import ReconciliationDiagram from '../../components/diagrams/ReconciliationDiagram.astro';
+import AsyncMediaDiagram from '../../components/diagrams/AsyncMediaDiagram.astro';
 
 export async function getStaticPaths() {
   const all = (await getCollection('work')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -19,7 +22,9 @@ interface Props {
 
 const { entry, prev, next } = Astro.props;
 const { Content } = await render(entry);
-const { title, summary, period, role, areas, stack, metric } = entry.data;
+const { title, summary, period, role, areas, stack, metric, context, diagram } = entry.data;
+const diagrams = { pipeline: PipelineDiagram, reconciliation: ReconciliationDiagram, 'async-media': AsyncMediaDiagram };
+const Diagram = diagram ? diagrams[diagram] : null;
 ---
 
 <Base title={title} description={summary}>
@@ -49,14 +54,15 @@ const { title, summary, period, role, areas, stack, metric } = entry.data;
             <dd class="mt-2 text-ink">{role}</dd>
           </div>
           <div>
-            <dt class="eyebrow">Company</dt>
-            <dd class="mt-2 text-ink">{entry.id === 'smart-url-checker' ? 'Optmyzr (hackathon)' : 'Optmyzr'}</dd>
+            <dt class="eyebrow">Context</dt>
+            <dd class="mt-2 text-ink">{context ?? 'Optmyzr'}</dd>
           </div>
         </dl>
       </div>
     </header>
 
     <div class="container-x max-w-4xl py-14 sm:py-16">
+      {Diagram && <Diagram />}
       <div class="grid gap-12 lg:grid-cols-[1fr_14rem]">
         <div class="prose-case min-w-0">
           <Content />
@@ -66,7 +72,9 @@ const { title, summary, period, role, areas, stack, metric } = entry.data;
           {
             metric && (
               <div class="card p-5">
-                <p class="text-3xl font-semibold tracking-tight text-accent">{metric.value}</p>
+                <p class:list={['font-semibold tracking-tight text-accent', metric.value.length > 8 ? 'text-2xl' : 'text-3xl']}>
+                  {metric.value}
+                </p>
                 <p class="mt-2 text-sm leading-snug text-muted">{metric.label}</p>
               </div>
             )

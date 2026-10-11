@@ -1,14 +1,15 @@
 ---
-title: Cutting 10.8 TB of S3 storage without breaking downloads
-summary: Put unbounded applied-results data on lifecycle expiry — two prefixes at 8 TB and 2.8 TB — while keeping the “download my applied changes” feature working.
+title: Cutting 10.8 TB of storage without breaking a user feature
+summary: Two storage prefixes had grown without bound to 8 TB and 2.8 TB. I redesigned retention around lifecycle policies and moved the write path — while keeping the customer-facing download feature working.
 period: Nov 2024 — Mar 2025
 date: 2025-03-01
 role: Engineer
-areas: [Platform, Backend]
+context: Per-run results and logs written by background jobs
+areas: [Performance & cost, Backend]
 stack: [AWS S3, C# / .NET, PHP]
 metric: { value: '10.8 TB', label: 'reclaimed, and growth flattened for good' }
 featured: false
-rank: 9
+rank: 10
 ---
 
 ## The problem

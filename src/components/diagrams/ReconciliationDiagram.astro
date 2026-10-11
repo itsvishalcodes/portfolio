@@ -1,0 +1,44 @@
+---
+import Diagram, { type Node, type Edge, type Label } from './Diagram.astro';
+
+const left: Node[] = [
+  { x: 16, y: 24, w: 252, h: 46, title: 'Publish starts' },
+  { x: 16, y: 92, w: 252, h: 46, title: 'External API creates entities ✓' },
+  { x: 16, y: 160, w: 252, h: 46, title: 'Worker dies before saving ✕', kind: 'fail' },
+  { x: 16, y: 228, w: 252, h: 46, title: 'Read sees crash signature', kind: 'accent' },
+];
+
+const stages = [
+  'Live entities in the target container',
+  'Name ∈ names this document created',
+  'Created after the document',
+  'Unambiguous matches only',
+  'At most K per name',
+];
+const cx = 540;
+const funnel: Node[] = stages.map((title, i) => {
+  const w = 400 - i * 46;
+  return { x: cx - w / 2, y: 24 + i * 46, w, h: 36, title };
+});
+funnel.push({ x: cx - 90, y: 24 + stages.length * 46, w: 180, h: 36, title: 'Recover & persist', kind: 'accent' });
+
+const edges: Edge[] = [
+  { d: 'M142,70 V90' },
+  { d: 'M142,138 V158' },
+  { d: 'M142,206 V226' },
+  { d: 'M268,251 H300 V42 H338', accent: true },
+];
+
+const labels: Label[] = [{ x: 300, y: 300, text: 'each stage can only remove candidates', anchor: 'start' }];
+---
+
+<Diagram
+  id="dg-recon"
+  width={760}
+  height={316}
+  nodes={[...left, ...funnel]}
+  edges={edges}
+  labels={labels}
+  title="Reconciliation after partial failure"
+  caption="Recovery runs only for documents with the crash signature. Candidates pass through a funnel of filters that can only narrow the set, and anything ambiguous is dropped rather than guessed."
+/>

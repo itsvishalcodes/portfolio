@@ -1,14 +1,15 @@
 ---
-title: Getting enterprise customers creating Meta ads again
-summary: Traced one symptom — “no Facebook Pages linked” — to three unrelated root causes, turned a hard block into a self-service recovery path, and shipped a month of Meta ad-creation fixes for enterprise accounts.
+title: One symptom, three root causes
+summary: Enterprise customers were fully blocked by one error message. I traced it to three unrelated causes — missing data, a swallowed error shape, and a bad field mapping — and turned a hard failure into a self-service recovery path.
 period: Sep — Oct 2026
 date: 2026-09-15
 role: Engineer
-areas: [Backend, Frontend]
-stack: [C# / .NET, PHP, React, Meta Graph API, Redis queues]
+context: Ad creation on Meta for enterprise agency accounts
+areas: [Reliability, Backend]
+stack: [C# / .NET, PHP, React, Redis job queues, Meta Graph API]
 metric: { value: '672', label: 'missing assets linked by one refresh for one customer' }
 featured: false
-rank: 11
+rank: 12
 ---
 
 ## The symptom

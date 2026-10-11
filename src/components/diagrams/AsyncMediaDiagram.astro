@@ -1,0 +1,44 @@
+---
+import Diagram, { type Node, type Edge, type Label } from './Diagram.astro';
+
+const nodes: Node[] = [
+  { x: 16, y: 24, w: 124, h: 60, title: 'Pick video', sub: 'browser' },
+  { x: 168, y: 24, w: 152, h: 60, title: 'Poster + progress', sub: 'captured client-side' },
+  { x: 348, y: 24, w: 172, h: 60, title: 'Pre-flight validator', sub: 'per-placement rules', kind: 'accent' },
+  { x: 548, y: 24, w: 196, h: 60, title: 'Upload once per source', sub: 'deduped across slots' },
+
+  { x: 548, y: 142, w: 196, h: 64, title: 'Async apply pass', sub: 'polls ingestion,', sub2: 'advances ready items', kind: 'accent' },
+
+  { x: 548, y: 262, w: 196, h: 56, title: 'Create creative + ad', sub: 'after ingestion confirmed' },
+  { x: 292, y: 262, w: 210, h: 56, title: 'Persist + invalidate cache', sub: 'reads see results at once' },
+  { x: 16, y: 262, w: 236, h: 56, title: 'UI: PROCESSING → live', sub: 'success only when confirmed' },
+];
+
+const edges: Edge[] = [
+  { d: 'M140,54 H166' },
+  { d: 'M320,54 H346' },
+  { d: 'M520,54 H546' },
+  { d: 'M646,84 V140' },
+  { d: 'M548,162 H508 V190 H546', accent: true },
+  { d: 'M646,206 V260' },
+  { d: 'M548,290 H504' },
+  { d: 'M292,290 H254' },
+];
+
+const labels: Label[] = [
+  { x: 496, y: 172, text: 'still ingesting →', anchor: 'end' },
+  { x: 496, y: 186, text: 'enqueue own successor', anchor: 'end' },
+  { x: 434, y: 106, text: 'rejects bad combinations before submit', anchor: 'middle' },
+];
+---
+
+<Diagram
+  id="dg-media"
+  width={760}
+  height={336}
+  nodes={nodes}
+  edges={edges}
+  labels={labels}
+  title="Async media pipeline"
+  caption="Validation happens before submit, each file uploads once, and the apply job re-enqueues itself until the provider finishes ingesting — then it creates the ads, persists them and invalidates the read cache."
+/>

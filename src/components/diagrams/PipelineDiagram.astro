@@ -1,0 +1,51 @@
+---
+import Diagram, { type Node, type Edge, type Label } from './Diagram.astro';
+
+const nodes: Node[] = [
+  { x: 16, y: 24, w: 128, h: 60, title: 'Scheduler', sub: 'every account, daily' },
+  { x: 176, y: 24, w: 140, h: 60, title: 'Priority queue', sub: 'important first' },
+  { x: 348, y: 24, w: 176, h: 60, title: 'Worker pool', sub: 'adaptive concurrency', kind: 'accent' },
+  { x: 592, y: 24, w: 152, h: 60, title: 'Third-party APIs', sub: 'per-developer quotas' },
+
+  { x: 16, y: 150, w: 210, h: 60, title: 'Redis', sub: 'shared “quota exhausted” flag' },
+  { x: 290, y: 126, w: 290, h: 118, title: 'Per-account run — each module isolated', kind: 'group', align: 'start' },
+  { x: 306, y: 160, w: 58, h: 40, title: 'M1 ✓' },
+  { x: 372, y: 160, w: 58, h: 40, title: 'M2 ✓' },
+  { x: 438, y: 160, w: 58, h: 40, title: 'M3 ✕', kind: 'fail' },
+  { x: 504, y: 160, w: 60, h: 40, title: '… ~20' },
+
+  { x: 290, y: 282, w: 128, h: 56, title: 'S3', sub: 'results' },
+  { x: 446, y: 282, w: 134, h: 56, title: 'Run monitor', sub: 'MongoDB' },
+  { x: 608, y: 282, w: 136, h: 56, title: 'Daily report', sub: 'Slack · New Relic' },
+];
+
+const edges: Edge[] = [
+  { d: 'M144,54 H174' },
+  { d: 'M316,54 H346' },
+  { d: 'M524,54 H590', both: true },
+  { d: 'M121,150 V112 H420 V86', dashed: true, accent: true, both: true },
+  { d: 'M470,84 V124' },
+  { d: 'M354,244 V280' },
+  { d: 'M512,244 V280' },
+  { d: 'M580,310 H606' },
+];
+
+const labels: Label[] = [
+  { x: 558, y: 16, text: 'quota errors', anchor: 'middle' },
+  { x: 132, y: 104, text: 'set on quota error · read before each call', anchor: 'start' },
+  { x: 435, y: 226, text: 'a failure skips one module, not the account', anchor: 'middle' },
+  { x: 16, y: 252, text: 'concurrency follows US-Eastern time of day', anchor: 'start' },
+  { x: 16, y: 268, text: 'and halves after recent quota errors', anchor: 'start' },
+];
+---
+
+<Diagram
+  id="dg-pipeline"
+  width={760}
+  height={352}
+  nodes={nodes}
+  edges={edges}
+  labels={labels}
+  title="Resilient daily processing pipeline"
+  caption="Workers share backpressure through Redis, concurrency adapts to time of day and recent quota errors, and each module runs in its own failure boundary. Run state feeds a daily report of anything left unprocessed."
+/>

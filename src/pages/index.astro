@@ -10,6 +10,7 @@ import Projects from '../components/Projects.astro';
 import Skills from '../components/Skills.astro';
 import Education from '../components/Education.astro';
 import Contact from '../components/Contact.astro';
+import Approach from '../components/Approach.astro';
 import Icon from '../components/Icon.astro';
 
 const all = await getCollection('work');
@@ -29,8 +30,8 @@ const spans = ['lg:col-span-4', 'lg:col-span-2', 'lg:col-span-2', 'lg:col-span-2
       <SectionHeading
         index="01"
         label="Selected work"
-        title="Things I built that are running in production."
-        lead="Case studies from four years at Optmyzr — what the problem was, what I built, and what changed. Customer names and internal details are left out."
+        title="Hard problems, solved in production."
+        lead="Case studies from four years of building a multi-tenant B2B platform — the problem, the constraints, the design and its trade-offs, and what changed. Customer names and internal details are left out."
       />
 
       <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-6">
@@ -69,6 +70,7 @@ const spans = ['lg:col-span-4', 'lg:col-span-2', 'lg:col-span-2', 'lg:col-span-2
     </div>
   </section>
 
+  <Approach />
   <Experience />
   <Projects />
   <Skills />

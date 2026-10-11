@@ -391,3 +391,66 @@
   opacity: 1;
   transform: none;
 }
+
+/* ---------- Architecture diagrams ---------- */
+.dg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: var(--font-sans);
+}
+.dg .box {
+  fill: var(--surface);
+  stroke: var(--border-strong);
+  stroke-width: 1;
+}
+.dg .box-accent {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+}
+.dg .box-fail {
+  fill: transparent;
+  stroke: var(--subtle);
+  stroke-dasharray: 4 3;
+}
+.dg .group {
+  fill: none;
+  stroke: var(--border-strong);
+  stroke-dasharray: 5 4;
+}
+.dg .t {
+  fill: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+}
+.dg .tg {
+  fill: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+.dg .s {
+  fill: var(--muted);
+  font-size: 11px;
+}
+.dg .l {
+  fill: var(--subtle);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+}
+.dg .edge {
+  fill: none;
+  stroke: var(--subtle);
+  stroke-width: 1.4;
+}
+.dg .edge-dash {
+  stroke-dasharray: 4 4;
+}
+.dg .edge-accent {
+  stroke: var(--accent);
+}
+.dg .head {
+  fill: var(--subtle);
+}
+.dg .head-accent {
+  fill: var(--accent);
+}

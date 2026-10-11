@@ -1,13 +1,14 @@
 ---
-title: Smart URL Checker — an AI hackathon project
-summary: A standalone Python service that finds ad landing pages that load fine but don’t match their ads — and estimates the spend at risk — built as a cost-conscious funnel so most pages never reach an LLM.
+title: A cost-bounded LLM pipeline for content verification
+summary: A standalone service that finds landing pages that load fine but contradict the ads pointing at them — and estimates the spend at risk — built as a funnel so most pages never reach an LLM.
 period: Sep — Oct 2026
 date: 2026-10-02
 role: Builder — internal hackathon, Sep 29 – Oct 1
-areas: [AI, Backend]
+context: Smart URL Checker
+areas: [AI, Distributed systems, Backend]
 stack: [Python, FastAPI, Playwright, MongoDB, Redis, S3 / MinIO, OpenAI & Gemini APIs, Docker]
 featured: false
-rank: 15
+rank: 16
 ---
 
 ## The idea

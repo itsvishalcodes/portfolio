@@ -3,7 +3,8 @@
 export const site = {
   name: 'Vishal Tiwari',
   shortName: 'Vishal',
-  role: 'Full-Stack Software Engineer',
+  role: 'Software Engineer',
+  focus: 'Backend · Distributed systems · Frontend',
   company: 'Optmyzr',
   location: 'Gurgaon, India',
   email: 'itsvishalcodes@gmail.com',
@@ -11,7 +12,7 @@ export const site = {
   // Put a PDF in /public and set e.g. '/Vishal-Tiwari-Resume.pdf' to show a Résumé button.
   resumeUrl: '',
   description:
-    'Vishal Tiwari — full-stack software engineer. 4+ years building Optmyzr’s PPC optimization platform with React/Redux, C#/.NET and PHP across the Google, Microsoft, Meta, LinkedIn and Amazon Ads APIs.',
+    'Vishal Tiwari — software engineer with 4+ years building production systems end to end: fault-tolerant backend pipelines, async workflows over third-party APIs, and large React applications. C#/.NET, TypeScript, React, Redis, AWS.',
 };
 
 export type Social = { label: string; href: string; handle: string; icon: IconName };
@@ -25,18 +26,20 @@ export const socials: Social[] = [
 ];
 
 export const stats = [
-  { value: '4+', label: 'years at Optmyzr', note: 'intern → SDE' },
-  { value: '1,750+', label: 'commits shipped', note: 'non-merge, May 2022 → now' },
-  { value: '36', label: 'epics owned', note: 'across search & social' },
-  { value: '475+', label: 'Jira issues resolved', note: 'of 620+ assigned since late 2024' },
-  { value: '5', label: 'ad platform APIs', note: 'Google · Microsoft · Meta · LinkedIn · Amazon' },
-  { value: '10.8 TB', label: 'S3 storage reclaimed', note: 'via lifecycle expiry' },
+  { value: '4+', label: 'years in production engineering', note: 'Apr 2022 → now' },
+  { value: '36', label: 'epics owned', note: 'design doc → launch → on-call' },
+  { value: '1,000+', label: 'B2B customers on systems I built', note: 'multi-tenant SaaS' },
+  { value: '5×', label: 'usage growth', note: 'on a product I built 0 → 1' },
+  { value: '10.8 TB', label: 'cloud storage cut', note: 'S3 lifecycle redesign' },
+  { value: '1,750+', label: 'commits to production', note: 'non-merge, across 4 stacks' },
 ];
 
-export const platforms = ['Google Ads', 'Microsoft Advertising', 'Meta (Facebook & Instagram)', 'LinkedIn Ads', 'Amazon Ads'];
+// Third-party platforms integrated in production (shown as context, not identity).
+export const platforms = ['Google Ads', 'Microsoft Advertising', 'Meta', 'LinkedIn', 'Amazon Ads'];
 
 export const nav = [
   { label: 'Work', href: '/#work' },
+  { label: 'Approach', href: '/#approach' },
   { label: 'Experience', href: '/#experience' },
   { label: 'Projects', href: '/#projects' },
   { label: 'Skills', href: '/#skills' },

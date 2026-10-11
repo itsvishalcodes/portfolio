@@ -2,6 +2,7 @@ export type Role = {
   title: string;
   org: string;
   orgUrl?: string;
+  orgNote?: string;
   period: string;
   location: string;
   summary: string;
@@ -11,23 +12,25 @@ export type Role = {
 
 export const roles: Role[] = [
   {
-    title: 'Software Development Engineer 1',
+    title: 'Software Development Engineer',
     org: 'Optmyzr',
     orgUrl: 'https://www.optmyzr.com',
+    orgNote: 'B2B SaaS · 1,000+ customers',
     period: 'Jun 2023 — Present',
     location: 'Remote · Hyderabad, India',
     summary:
-      'Full-stack engineer on a PPC-optimization SaaS used by advertising agencies worldwide. I own product areas end to end — from PRD review and design docs through backend, frontend, launch and production support — on a 20–50 person engineering team.',
+      'I own problem areas end to end across the backend and the frontend — writing the design doc, building the services, workers and UI, shipping, and carrying the pager — on a 20–50 person engineering team.',
     highlights: [
-      'Hardened the daily optimization pipeline that processes every customer account against the Google Ads API — Redis-coordinated rate-limit backoff, time-of-day parallelism and per-widget fault isolation.',
-      'Took Meta video ads from zero to production across two products: async ingestion, pre-flight placement validation and AI copy that reads the whole video.',
-      'Owned the delivery epics for the All Portfolio Dashboard from POC to out-of-beta GA — a multi-account surface serving 5,000+ portfolios across 1,000+ customers.',
-      'Sole engineer on a premium feature that turns competitor data into Google Ads audiences — PRD → POC → design doc → backend → plan gating → analytics.',
-      'Shipped AI into the product: LLM function-calling schemas for the in-product assistant, AI summaries, multimodal ad copy and global search backed by vector search.',
-      'Merged two React codebases into one (355 files moved, ~580 reconciled) and cut 10.8+ TB of S3 storage with lifecycle expiry.',
-      'On the primary on-call rotation; handled tracked production incidents through to resolution. Mentored an intern and a junior engineer, and joined requirements calls with enterprise customers to scope features.',
+      'Made a multi-tenant daily processing pipeline resilient at scale: cross-process rate-limit backoff coordinated through Redis, adaptive concurrency, per-unit fault isolation, and alerting that turned silent failures into daily reports.',
+      'Designed a reconciliation path that recovers state after a worker dies mid-operation across a system boundary — with guards that suppress any ambiguous match rather than guess.',
+      'Replaced a blocking request path with an async, self-scheduling workflow for multi-minute external media ingestion, plus pre-flight validation and per-source upload deduplication.',
+      'Led the consolidation of two diverged React codebases (355 files moved, ~580 reconciled) and cleared all 13 launch blockers within a week.',
+      'Owned the delivery epics for a hierarchical multi-tenant dashboard from POC to GA, serving 5,000+ portfolios across 1,000+ customers.',
+      'Shipped LLM features in production: versioned tool-calling schemas, platform-aware context routing, multimodal generation, and vector-search-backed global search used 1,000+ times a day.',
+      'Cut 10.8 TB of cloud storage by redesigning data retention around lifecycle policies without breaking user downloads.',
+      'Primary on-call rotation and incident ownership; mentored an intern and a junior engineer; regular reviewer on other teams’ designs and code; joined enterprise-customer calls to scope requirements.',
     ],
-    stack: ['React', 'Redux', 'C# / .NET', 'PHP', 'MySQL', 'MongoDB', 'Redis', 'AWS', 'Google Ads API', 'Meta Marketing API'],
+    stack: ['C# / .NET', 'TypeScript', 'React', 'Redux', 'Redis', 'MySQL', 'MongoDB', 'AWS', 'PHP', 'LLM APIs'],
   },
   {
     title: 'Software Engineer Intern',
@@ -35,14 +38,14 @@ export const roles: Role[] = [
     orgUrl: 'https://www.optmyzr.com',
     period: 'Apr 2022 — Jun 2023',
     location: 'Remote · Hyderabad, India',
-    summary:
-      'Joined while finishing my degree and was converted to full-time on the back of the Express v2 launch.',
+    summary: 'Joined while finishing my degree; converted to full-time on the back of a 0 → 1 product launch.',
     highlights: [
-      'Built and launched Optmyzr Express v2 — a React/Redux one-click optimization product with ~20 suggestion widgets and a C# suggestion pipeline — replacing the legacy tool for all users in 7 months. Usage grew 5×.',
-      'Shipped the unified side navigation across every tool, including a Webpack plugin that renders React components inside legacy PHP pages.',
-      'Built dynamic pages and templates for optmyzr.com with Hugo (taxonomies, shortcodes) and CRM integration, so the content team could publish without engineering.',
+      'Built a new product 0 → 1 — the React/Redux frontend architecture, ~20 recommendation modules and a C# generation pipeline — and replaced the legacy tool for all users in 7 months. Usage grew 5×.',
+      'Kept 1,000+-row lists at 60 fps with windowed virtualization, and isolated every module behind its own error boundary so one failure could never take down the page.',
+      'Wrote a Webpack plugin that renders React components inside server-rendered PHP pages, which let one navigation system replace two diverged ones across every tool.',
+      'Built the company marketing site’s dynamic templates on Hugo with CRM integration, removing engineering from the content team’s publishing path.',
     ],
-    stack: ['React', 'Redux', 'C#', 'PHP', 'CoffeeScript', 'Webpack', 'Hugo'],
+    stack: ['React', 'Redux', 'C# / .NET', 'Webpack', 'PHP', 'Hugo'],
   },
   {
     title: 'Freelance Developer',
@@ -50,7 +53,7 @@ export const roles: Role[] = [
     period: 'During college · ~6 months',
     location: 'Remote',
     summary: 'Scoped, built and supported paid client work on my own before my first full-time role.',
-    highlights: ['Built and maintained a template-based WordPress / PHP e-commerce storefront for a private client.'],
+    highlights: ['Built and maintained a WordPress / PHP e-commerce storefront for a private client.'],
     stack: ['WordPress', 'PHP', 'MySQL'],
   },
 ];
@@ -62,49 +65,43 @@ export const journey: { year: string; items: Milestone[] }[] = [
     year: '2022',
     items: [
       { when: 'Apr', text: 'Joined Optmyzr as a software engineer intern' },
-      { when: 'May–Jul', text: 'PPC Audit fixes; React error page migrated off PHP views' },
-      { when: 'Aug', text: 'Started building Optmyzr Express v2', slug: 'express-v2' },
+      { when: 'Aug', text: 'Started building a new product, 0 → 1', slug: 'express-v2' },
     ],
   },
   {
     year: '2023',
     items: [
-      { when: 'Mar', text: 'Express v2 new design live for all users', slug: 'express-v2' },
-      { when: 'Jun', text: 'Converted to full-time · new side navigation in opt-in beta', slug: 'unified-navigation' },
-      { when: 'Jul', text: 'Pipeline run monitoring with daily Slack digests', slug: 'optimization-pipeline' },
-      { when: 'Sep', text: 'New navigation on every page', slug: 'unified-navigation' },
-      { when: 'Oct–Nov', text: 'New signup flow and Microsoft Ads onboarding' },
+      { when: 'Mar', text: 'Product launched to all users; legacy tool retired', slug: 'express-v2' },
+      { when: 'Jun', text: 'Converted to full-time · React-in-PHP navigation in beta', slug: 'unified-navigation' },
+      { when: 'Jul', text: 'Pipeline run monitoring and daily failure reports', slug: 'pipeline-resilience' },
+      { when: 'Sep', text: 'One navigation system on every page', slug: 'unified-navigation' },
     ],
   },
   {
     year: '2024',
     items: [
-      { when: 'Jan–Feb', text: 'Microsoft Ads suggestions migrated to the data cache · PPC Audit Score for Microsoft Ads', slug: 'microsoft-ads' },
-      { when: 'May–Sep', text: 'Rate-limit backoff, dynamic parallelism and per-widget isolation', slug: 'optimization-pipeline' },
-      { when: 'Sep', text: 'Microsoft Ads dashboard widgets & shareable dashboards', slug: 'microsoft-ads' },
-      { when: 'Nov', text: 'Rule Engine account scope GA · All Portfolio Dashboard begins', slug: 'all-portfolio-dashboard' },
+      { when: 'Jan–Feb', text: 'Migrated a second platform’s pipeline onto the shared data cache', slug: 'data-cache-migration' },
+      { when: 'May–Sep', text: 'Rate-limit backoff, adaptive concurrency, fault isolation', slug: 'pipeline-resilience' },
+      { when: 'Nov', text: 'Started the multi-tenant portfolio dashboard', slug: 'all-portfolio-dashboard' },
     ],
   },
   {
     year: '2025',
     items: [
-      { when: 'Mar', text: '10.8 TB of S3 storage put on lifecycle expiry', slug: 's3-storage' },
-      { when: 'May', text: 'AI summary on Top Competitors · “Portfolios for Search” beta', slug: 'all-portfolio-dashboard' },
-      { when: 'Apr–Jun', text: 'Custom Audiences from competitor data', slug: 'custom-audiences' },
-      { when: 'Jun', text: 'All Portfolio Dashboard out of beta', slug: 'all-portfolio-dashboard' },
-      { when: 'Aug–Dec', text: 'Social All Accounts Dashboard; one portfolio creator for Search & Social' },
+      { when: 'Mar', text: '10.8 TB of storage put on lifecycle policies', slug: 's3-storage' },
+      { when: 'Apr–Jun', text: 'Solo feature from PRD to production', slug: 'custom-audiences' },
+      { when: 'Jun', text: 'Portfolio dashboard out of beta', slug: 'all-portfolio-dashboard' },
     ],
   },
   {
     year: '2026',
     items: [
-      { when: 'Feb–Mar', text: 'Locale-aware formatting across the social suite (5 languages)' },
-      { when: 'Mar–Jun', text: 'Express for Meta & LinkedIn; onboarding for the Search + Social merger', slug: 'search-social-merger' },
-      { when: 'May–Jun', text: 'Weather optimization for Meta; new Rule Engine date operators', slug: 'rule-engine-weather' },
-      { when: 'Jul', text: 'Two React repos merged into one · Explorer global filters', slug: 'repo-consolidation' },
-      { when: 'Aug', text: 'Video ads for Meta · dead-worker ad reconciliation', slug: 'meta-video-ads' },
-      { when: 'Sep', text: 'Explorer customer beta · enterprise Meta ad-creation fixes', slug: 'meta-pages-recovery' },
-      { when: 'Sep–Oct', text: 'Smart URL Checker — hackathon project, now being integrated', slug: 'smart-url-checker' },
+      { when: 'Mar–Jun', text: 'Async bulk onboarding for a company-wide product merger', slug: 'search-social-merger' },
+      { when: 'Jun', text: 'LLM tool-calling across every platform', slug: 'ai-in-production' },
+      { when: 'Jul', text: 'Two diverged React codebases merged into one', slug: 'repo-consolidation' },
+      { when: 'Aug', text: 'Async media pipeline · partial-failure reconciliation', slug: 'async-media-pipeline' },
+      { when: 'Sep', text: 'One symptom, three root causes: enterprise escalations', slug: 'enterprise-escalation-rca' },
+      { when: 'Sep–Oct', text: 'Cost-bounded LLM verification service (hackathon)', slug: 'smart-url-checker' },
     ],
   },
 ];

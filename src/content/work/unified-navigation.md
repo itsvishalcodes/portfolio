@@ -1,13 +1,14 @@
 ---
-title: One navigation for every tool
-summary: Shipped the platform’s unified side navigation across every tool — including a Webpack plugin that renders React components inside legacy PHP pages — collapsing two navigation codebases into one.
+title: Bridging two frontend stacks with a build plugin
+summary: Wrote a Webpack plugin that renders React components inside server-rendered PHP pages, which let one navigation system replace two diverged ones across every tool.
 period: '2023'
 date: 2023-06-15
 role: Engineer (intern → SDE)
-areas: [Frontend, Platform]
+context: The product-wide side navigation
+areas: [Frontend]
 stack: [React, Webpack, PHP, CoffeeScript]
 featured: false
-rank: 14
+rank: 15
 ---
 
 ## The problem

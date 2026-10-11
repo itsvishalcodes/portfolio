@@ -1,14 +1,15 @@
 ---
-title: Rule Engine date operators and weather optimization for Meta
-summary: Turned a customer feature request into a released capability with reusable relative-date operators, and extended the weather-optimization tool to Meta Ads.
+title: Extending a rule engine without breaking stored rules
+summary: Turned a customer feature request into general relative-date operators for a rule engine, backward compatible with every stored rule — and extended a weather-driven automation tool to a new platform with fuzzy geo matching.
 period: May — Jun 2026
 date: 2026-06-10
 role: Engineer
-areas: [Product, Backend, Frontend, AI]
-stack: [C# / .NET, React, Meta Marketing API, OpenWeather API, Rule Engine]
+context: The customer-facing Rule Engine and weather-based automation
+areas: [Backend, Frontend]
+stack: [C# / .NET, React, OpenWeather API, Meta Marketing API]
 metric: { value: 'Released', label: 'customer feature request delivered' }
 featured: false
-rank: 10
+rank: 11
 ---
 
 ## The request

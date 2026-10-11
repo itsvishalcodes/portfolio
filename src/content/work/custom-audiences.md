@@ -1,14 +1,15 @@
 ---
-title: Custom audiences from competitor data — solo, PRD to premium feature
-summary: Sole engineer on a premium feature that turns competitive-intelligence data into targetable Google Ads audiences. I owned PRD review, POC, design doc, backend, plan gating and analytics.
+title: Solo, from PRD to a premium feature in production
+summary: The only engineer on a premium feature — I reviewed the PRD, built the POC, wrote the design doc, then implemented batch writes to a third-party API with partial-failure semantics, plan gating and analytics.
 period: Apr — Jun 2025
 date: 2025-06-01
 role: Sole engineer
-areas: [Product, Backend, Frontend, AI]
+context: Turning competitor data into Google Ads audience segments
+areas: [Backend, Frontend, AI]
 stack: [C# / .NET, Google Ads API, React, Redux, LLM prompting]
 metric: { value: '100+', label: 'segments created in the first two months' }
 featured: false
-rank: 6
+rank: 8
 ---
 
 ## The problem

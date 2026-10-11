@@ -1,8 +1,8 @@
 ---
 import Icon from './Icon.astro';
-import { site, socials, platforms, stats } from '../data/site';
+import { site, socials, stats } from '../data/site';
 
-const commits = stats.find((s) => s.label === 'commits shipped')?.value ?? '';
+const commits = stats.find((s) => s.label.startsWith('commits'))?.value ?? '';
 ---
 
 <section class="relative overflow-hidden">
@@ -13,20 +13,20 @@ const commits = stats.find((s) => s.label === 'commits shipped')?.value ?? '';
     <div>
       <p class="reveal inline-flex items-center gap-2.5 rounded-full border border-line bg-surface/70 py-1.5 pr-3.5 pl-2.5 text-sm text-muted backdrop-blur">
         <span class="pulse-dot size-2 rounded-full bg-accent"></span>
-        {site.role} · {site.company}
+        {site.role} · {site.focus}
       </p>
 
       <h1
         class="reveal mt-6 text-[2.6rem] leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-[4.25rem]"
         style="--delay: 60ms"
       >
-        I build <span class="whitespace-nowrap">ad-tech</span> that <span class="text-gradient">stays correct</span> at scale.
+        I build systems that <span class="text-gradient">stay correct</span> at scale.
       </h1>
 
       <p class="reveal mt-6 max-w-xl text-lg leading-relaxed text-pretty text-muted" style="--delay: 120ms">
-        Hi, I’m {site.shortName}. For 4+ years I’ve built Optmyzr’s PPC optimization platform end to end — React/Redux
-        front ends, C#/.NET pipelines and PHP services — against the Google, Microsoft, Meta, LinkedIn and Amazon Ads
-        APIs. I like the hard parts: rate limits, partial failures, and the rules platforms don’t document.
+        Hi, I’m {site.shortName} — a software engineer with 4+ years of building production systems end to end:
+        fault-tolerant backend pipelines, async workflows over rate-limited third-party APIs, and the large React
+        applications on top. I own problems from the design doc to the on-call pager.
       </p>
 
       <div class="reveal mt-8 flex flex-wrap items-center gap-3" style="--delay: 180ms">
@@ -71,15 +71,15 @@ const commits = stats.find((s) => s.label === 'commits shipped')?.value ?? '';
         <div class="space-y-4 p-5 sm:p-6">
           <div>
             <p><span class="text-accent">❯</span> <span class="text-ink">whoami</span></p>
-            <p class="text-muted">vishal tiwari — full-stack engineer, gurgaon</p>
+            <p class="text-muted">vishal tiwari — software engineer, gurgaon</p>
+          </div>
+          <div>
+            <p><span class="text-accent">❯</span> <span class="text-ink">focus --list</span></p>
+            <p class="text-muted">distributed backends · fault tolerance · frontend architecture · applied ai</p>
           </div>
           <div>
             <p><span class="text-accent">❯</span> <span class="text-ink">stack --core</span></p>
-            <p class="text-muted">react · redux · c#/.net · php · mysql · mongodb · redis · aws</p>
-          </div>
-          <div>
-            <p><span class="text-accent">❯</span> <span class="text-ink">platforms --in-production</span></p>
-            <p class="text-muted">{platforms.map((p) => p.split(' (')[0].toLowerCase()).join(' · ')}</p>
+            <p class="text-muted">c#/.net · typescript · react · redis · mysql · mongodb · aws</p>
           </div>
           <div>
             <p><span class="text-accent">❯</span> <span class="text-ink">git log --author=vishal --no-merges | wc -l</span></p>

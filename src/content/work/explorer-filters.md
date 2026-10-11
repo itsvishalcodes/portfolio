@@ -1,14 +1,15 @@
 ---
-title: Global filters for the Explorer drill-down
-summary: A filter system for Optmyzr Explorer that compiles to the central query service’s DSL, with a new distinct-values backend operation for typeahead over huge campaign sets.
+title: Filtering large datasets through a query DSL
+summary: A filter system that compiles UI state into a central query service’s DSL, with a new distinct-values endpoint, typeahead over very large sets, keyset pagination and persisted state.
 period: Jul 2026
 date: 2026-07-10
 role: Engineer
-areas: [Frontend, Backend]
-stack: [React, Redux, C# / .NET, Firebase, i18next]
+context: Explorer, the account drill-down surface
+areas: [Frontend, Backend, Performance & cost]
+stack: [React, Redux, C# / .NET, SQL, Firebase, i18next]
 metric: { value: '2 days', label: 'from design to ~25 scoped commits' }
 featured: false
-rank: 12
+rank: 13
 ---
 
 ## Context

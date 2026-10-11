@@ -1,50 +1,50 @@
 ---
-title: AI features in a production B2B product
-summary: Function-calling schemas for the in-product AI assistant, platform-aware routing, AI summaries, multimodal ad copy, and global search across nine tools backed by vector search.
+title: Making LLM tool-calling reliable in production
+summary: The model is rarely the bottleneck — schemas, context routing and truncation are. I designed versioned tool schemas for an in-product assistant, fixed silent capability gaps, built multimodal generation, and rolled out search backed by vector retrieval.
 period: Nov 2024 — 2026
 date: 2026-06-15
 role: Engineer
-areas: [AI, Backend, Frontend]
-stack: [LLM tool calling, MCP, Prompt engineering, Pinecone-backed search, C# / .NET, React]
-metric: { value: '1,000+', label: 'global-search invocations a day' }
+context: Sidekick, the AI assistant inside a B2B SaaS, acting on customers’ ad accounts
+areas: [AI, Backend]
+stack: [LLM tool calling, MCP, Prompt engineering, Vector search, C# / .NET, React]
+metric: { value: '1,000+', label: 'search invocations a day' }
 featured: true
-rank: 6
+rank: 5
 ---
 
 ## Context
 
-Optmyzr ships an in-product AI assistant, Sidekick, that answers questions and acts on a user’s ad accounts by calling tools. Most of my AI work is the unglamorous part that decides whether that works in production: the tool schemas the model calls, the context it gets, and what happens when data doesn’t fit.
+The product ships an AI assistant that answers questions and takes actions by calling tools against a customer’s accounts. My work was the part that decides whether that works for real users: the contracts the model calls, the context it receives, and what happens when data doesn’t fit the window.
 
 ## What I built
 
-### Function-calling schemas for cross-platform optimizations
+### Versioned tool schemas
 
-When Express went cross-platform, I exposed Meta and LinkedIn optimization suggestions to the assistant. I authored and versioned the **tool / function schemas** across production v1 and v2 prompt sets, and the matching MCP tool definitions.
+When recommendations went cross-platform, I authored the tool / function schemas the model uses to fetch and act on them, kept them versioned across production v1 and v2 prompt sets, and kept the matching MCP tool definitions in sync with the backend arguments.
 
-The interesting bug: a missing enum value made **entire ad platforms unreachable to the model** — it simply had no way to ask for them. Nothing errored. I traced that class of silent capability gap end to end and closed a cluster of related QA bugs.
+**The bug class worth knowing about:** a single missing enum value made **entire platforms unreachable** to the model. Nothing errored — the model simply had no way to ask. I traced that class of silent capability gap end to end and closed a cluster of related QA bugs.
 
-### Platform-aware routing that survives list caps
+### Context routing that survives truncation
 
-Account lists sent to the model are capped. Sorted naively, social accounts fell off the end. I switched to **round-robin interleaving by platform, then capping**, so every platform survives truncation — and made account + platform drill-down work in every context.
+Account lists sent to the model are capped. Sorted naively, whole platforms fell off the end. I switched to **round-robin interleaving by platform, then capping**, so every platform survives truncation, and made account-plus-platform drill-down work in every context.
 
-### AI summaries
+### Multimodal generation
 
-- **Competitor data summary** — prompt design, caching keyed on date range, founder-review iterations.
-- **Weather rules summary** for the Meta weather-optimization tool.
-- The first end-to-end **AI widget on the Portfolio Dashboard** (Nov 2024).
+Copy generation for video now **samples frames across the whole timeline** instead of a single frame, so the output reflects the full creative.
 
-### Multimodal ad copy
+### Retrieval
 
-Extended AI ad-copy generation to **sample frames across a video’s timeline** instead of a single frame, so generated copy reflects the whole creative.
+Rolled out global search across **nine tools**, backed by the company’s in-house vector search, cutting navigation from 5+ clicks to 2. It now serves 1,000+ invocations a day.
 
-### Global search
+### Summaries
 
-Rolled out a global search bar across **9 social tools**, backed by Optmyzr’s in-house Pinecone vector search — navigation went from 5+ clicks to 2, and it now serves 1,000+ invocations a day.
+Prompt design and caching (keyed on the date range) for AI summaries of competitor data and of automation rules, iterated through founder review.
 
-### LLM-assisted migration
+## Also
 
-When merging two React codebases, I used LLM-assisted diff review to reconcile ~580 diverged shared files in reviewed batches — see the [repo consolidation](/work/repo-consolidation/) write-up.
+- Used LLM-assisted diff review to reconcile ~580 diverged files during a [codebase merge](/work/repo-consolidation/).
+- Built a [cost-bounded LLM verification service](/work/smart-url-checker/) with an eval set and evidence checks in code.
 
-## What I learned
+## Takeaway
 
-The model is rarely the bottleneck. Schemas, enums, truncation order and caching decide whether an AI feature is useful — and those failures are silent unless you go looking.
+Treat schemas and context as an API with a contract, version them, and test for what the model *can’t* do — those failures are silent unless you go looking.

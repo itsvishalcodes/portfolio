@@ -1,19 +1,20 @@
 ---
-title: All Portfolio Dashboard — POC to GA
-summary: Owned a strategic multi-account dashboard through its whole lifecycle, across PHP, C# and React — and extended the portfolio model to Meta, Instagram and LinkedIn.
+title: A hierarchical multi-tenant dashboard, POC to GA
+summary: Owned the delivery epics for a dashboard that rolls thousands of accounts up into portfolios and groups — data model, cross-service APIs, access-loss handling and a fast hierarchical UI — and extended it to new platforms without a rewrite.
 period: Nov 2024 — Jul 2025
 date: 2025-06-15
 role: Delivery-epic owner
-areas: [Product, Frontend, Backend]
+context: The All Portfolio Dashboard — agencies managing many client accounts at once
+areas: [Frontend, Backend]
 stack: [React, Redux, PHP, C# / .NET, MySQL, MongoDB]
 metric: { value: '5,000+', label: 'portfolios across 1,000+ customers' }
-featured: true
-rank: 5
+featured: false
+rank: 7
 ---
 
 ## The problem
 
-Optmyzr’s dashboards were single-account, but agencies manage dozens of accounts grouped into client portfolios. Portfolio-level tooling was a strategic bet — and the company was bringing its separate Social product into the same model at the same time.
+The product’s dashboards were single-account, but customers manage dozens of accounts grouped into client portfolios and portfolio groups. Portfolio-level tooling was a strategic bet — and a second product line had to fit the same model at the same time.
 
 ## What I owned
 

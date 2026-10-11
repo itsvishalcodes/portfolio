@@ -1,18 +1,19 @@
 ---
-title: Bringing Express to Microsoft Ads
-summary: Migrated the whole Microsoft Ads suggestion stack to the data-cache architecture and shipped new Microsoft optimizations, audits and dashboard widgets.
+title: Moving a pipeline onto a shared data-cache layer
+summary: Migrated an entire platform’s recommendation stack off direct report reads onto the shared data-cache architecture, then built new recommendations, audits and dashboard widgets on top.
 period: Dec 2023 — Sep 2024
 date: 2024-04-15
 role: Engineer
-areas: [Backend, Product]
+context: Bringing Microsoft Advertising to parity with Google Ads
+areas: [Backend, Performance & cost]
 stack: [C# / .NET, Microsoft Advertising API, React, PHP]
 featured: false
-rank: 13
+rank: 14
 ---
 
 ## Context
 
-Express started on Google Ads. Agencies also run Microsoft Advertising, and the Microsoft side of the suggestion pipeline still read data the old way.
+The recommendation product started on one ad platform. The second platform’s side of the pipeline still read data the old way — straight from the provider’s reports — so it couldn’t share the cache, parsing and aggregation the main platform used.
 
 ## What I built
 
@@ -24,4 +25,4 @@ Express started on Google Ads. Agencies also run Microsoft Advertising, and the 
 
 ## Outcome
 
-Microsoft Ads became a first-class platform in Express — the same chassis later carried Meta and LinkedIn.
+The second platform reached parity on the shared architecture, and the same chassis later carried two more.

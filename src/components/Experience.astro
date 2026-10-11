@@ -7,10 +7,10 @@ import { roles, journey } from '../data/experience';
 <section id="experience" class="py-24 sm:py-32">
   <div class="container-x">
     <SectionHeading
-      index="02"
+      index="03"
       label="Experience"
       title="Four years, one company, a lot of ground."
-      lead="I joined Optmyzr as an intern in 2022 and have worked across nearly every layer of the product since — from the React apps agencies click on to the daemons that talk to ad platforms overnight."
+      lead="I joined Optmyzr as an intern in 2022 and have since worked across nearly every layer of a multi-tenant B2B platform — background workers and queues, service APIs, data stores, and the React applications customers use every day."
     />
 
     <div class="grid gap-12 lg:grid-cols-[1fr_22rem] lg:gap-16">
@@ -30,6 +30,7 @@ import { roles, journey } from '../data/experience';
                     ) : (
                       <span class="text-ink">{r.org}</span>
                     )}
+                    {r.orgNote && <span class="text-subtle"> · {r.orgNote}</span>}
                     <span class="text-subtle"> · {r.location}</span>
                   </p>
                 </div>
