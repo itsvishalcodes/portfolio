@@ -2,26 +2,26 @@
 import Base from '../../../layouts/Base.astro';
 import Icon from '../../../components/Icon.astro';
 
-// Linked from the app's Google Play listing. Keep this URL stable.
+// Linked from the app's Google Play and App Store listings. Keep this URL stable.
 const contact = 'contact@itsvishalcodes.com';
 ---
 
 <Base
-  title="LPU Touch privacy policy"
-  description="How the LPU Touch Android app handles your data: no backend, no ads, no analytics. Your UMS login goes only to the university’s servers."
+  title="Retouched for LPU UMS privacy policy"
+  description="How the Retouched for LPU UMS app for Android and iPhone handles your data: no backend, no ads, no analytics. Your UMS login goes only to the university’s servers."
 >
   <article class="container-x max-w-3xl py-14 sm:py-20">
     <a href="/projects/lpu-retouched/" class="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink">
       <Icon name="back" size={16} /> About the app
     </a>
-    <h1 class="mt-8 text-4xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-5xl">LPU Touch — Privacy Policy</h1>
-    <p class="mt-4 font-mono text-sm text-subtle">Last updated: <time datetime="2026-10-12">12 October 2026</time></p>
+    <h1 class="mt-8 text-4xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-5xl">Retouched for LPU UMS — Privacy Policy</h1>
+    <p class="mt-4 font-mono text-sm text-subtle">Last updated: <time datetime="2026-10-13">13 October 2026</time></p>
 
     <div class="prose-case mt-10">
       <p>
-        LPU Touch (the “App”) is an independent, student-built client for Lovely Professional University’s UMS student portal. It
-        is not an official app of, and is not endorsed by or affiliated with, the university. This policy explains what data the
-        App handles and how.
+        Retouched for LPU UMS (the “App”) is an independent, student-built client for Lovely Professional University’s UMS student
+        portal. It is not an official app of, and is not endorsed by or affiliated with, the university. This policy explains what
+        data the App handles and how.
       </p>
 
       <h2>Who processes your data</h2>
@@ -39,8 +39,10 @@ const contact = 'contact@itsvishalcodes.com';
           signed in, and are removed when you log out or uninstall the App.
         </li>
         <li>
-          <strong>Device identifier (Android ID).</strong> Sent with your login to the university’s servers as part of their
-          session/device handling.
+          <strong>Device identifier.</strong> On Android the App uses the Android ID; on iPhone it uses Apple’s identifier for vendor
+          (IDFV). It is sent to the university’s servers with your login and with the App’s other requests, for the university’s
+          session and device handling, and is not sent anywhere else. It is not the advertising ID, and the App does not use it for
+          tracking.
         </li>
         <li>
           <strong>Your academic information</strong> (attendance, marks, timetable, results, messages, announcements, profile and
@@ -48,6 +50,17 @@ const contact = 'contact@itsvishalcodes.com';
           collected by the developer.
         </li>
       </ul>
+
+      <h2>Camera</h2>
+      <p>
+        The App uses the camera only to scan the QR codes for mess meals and hostel entry/exit. The camera image is read on your
+        device; only the text inside the QR code is sent, together with the device identifier, to the university’s servers to
+        record the meal or the entry/exit. The App takes no photos or videos and does not store or upload any images.
+      </p>
+      <p>
+        The App asks for camera access the first time you scan. You can turn it off in your device’s settings, and everything
+        except QR scanning keeps working.
+      </p>
 
       <h2>What the App does NOT do</h2>
       <ul>
